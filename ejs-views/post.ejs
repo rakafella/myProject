@@ -3,23 +3,13 @@
   <%- include('./partials/head.ejs') %>
 <body>
   <%- include('./partials/nav.ejs') %>
-  <form id="contact-form">
-    <div class="form-info">
-      <label>Post Title
-        <input type="text" name="title">
-      </label>
-      <label>Author
-        <input type="text" name="author">
-      </label>
+  <article>
+    <div class="info">
+      <span><%= post.date || 'No date' %></span>
+      <span><%= post.author %></span>
     </div>
-    <div class="form-text">
-      <label>Post Text
-        <textarea name="text"></textarea>
-      </label>
-    </div>
-    <div class="form-button">
-      <input type="submit" value="Submit">
-    </div>
-  </form>
+    <h1><%= post.title %></h1>
+    <p><%= post.text %></p>
+  </article>
 </body>
 </html>
