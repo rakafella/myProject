@@ -27,7 +27,7 @@ app.get('/contacts', (req, res) => {
     const title = 'Contacts'
     const contacts = [
         { name: 'GitHub', link: 'https://github.com/rakafella'},
-        { name: 'Gmail', link: 'rakafella25@gmail.com'}
+        { name: 'Gmail', link: 'https://gmail.com/rakafella25@gmail.com'}
     ]
     res.render(createPath('contacts'), { contacts, title });
 });
