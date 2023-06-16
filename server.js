@@ -2,16 +2,18 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const Post = require('./models/post');
+const Contact = require('./models/contact');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 
 const PORT = 3000;
-const db = 'mongodb+srv://rakafella25:Drota987456321@cluster0.qn7nvw9.mongodb.net/posts'
+const db = 'mongodb+srv://rakafella25:Drota987456321@cluster0.qn7nvw9.mongodb.net/myproject'
 
 mongoose
-    .connect(db)
+    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true})
     .then((res) => console.log('Connect to DB'))
     .catch((error) => console.log(error));
 
@@ -34,24 +36,14 @@ app.get('/', (req, res) => {
 
 app.get('/contacts', (req, res) => {
     const title = 'Contacts'
-    const contacts = [
-        { name: 'GitHub', link: 'https://github.com/rakafella'},
-        { name: 'Gmail', link: 'https://gmail.com/rakafella25@gmail.com'}
-    ]
-    res.render(createPath('contacts'), { contacts, title });
+    Contact
+        .find()
+        .then((contacts) => res.render(createPath('contacts'), { contacts, title }))
+        .catch((error) => {
+            console.log(error);
+            res.render(createPath('error', { title: 'Error' }));
+        });
 });
-
-app.post('/add-post', (req,res) => {
-    const { title, author, text } = req.body;
-    const post = {
-        id: new Date(),
-        date: (new Date()).toLocaleDateString(),
-        title,
-        author,
-        text,
-    }
-    res.render(createPath('post'), { post, title });
-})
 
 app.get('/posts/:id', (req, res) => {
     const title = 'Post';
@@ -78,6 +70,18 @@ app.get('/posts', (req, res) => {
     ]
     res.render(createPath('posts'), { title, posts });
 });
+
+app.post('/add-post', (req, res) => {
+    const { title, author, text } = req.body;
+    const post = new Post({ title, author, text });
+    post
+      .save()
+      .then((result) => res.send(result))
+      .catch((error) => {
+        console.log(error);
+        res.render(createPath('error'), { title: 'Error' });
+      })
+  });
 
 app.get('/add-post', (req, res) => {
     const title = 'Add-post'
