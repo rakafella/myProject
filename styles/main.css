@@ -3,7 +3,7 @@ body {
   min-height: calc(100vh - 90px);
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
-  background: linear-gradient(to bottom, #00d2ff, #928dab);
+  background: linear-gradient(to bottom, #088d70, #978dca);
   color: #fff;
 }
 
@@ -44,7 +44,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #fff;
+  color: #861f9bc7;
 }
 
 article {
@@ -60,7 +60,7 @@ article {
 }
 
 h2 a {
-  color: aqua;
+  color: rgb(110, 34, 172);
 }
 
 form {
