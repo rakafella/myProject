@@ -3,7 +3,7 @@
   <%- include('./partials/head.ejs') %>
 <body>
   <%- include('./partials/nav.ejs') %>
-  <article>
+  <article class="post">
     <div class="info">
       <span><%= post.createdAt.toLocaleDateString() || 'No date' %></span>
       <span><%= post.author %></span>
@@ -17,6 +17,7 @@
       <i class="fas fa-trash-alt" data-id="<%= post.id %>"></i>
     </button>
   </article>
+
   <script>
     document.addEventListener('click', (e) => {
       const id = e.target?.dataset?.id || null;
